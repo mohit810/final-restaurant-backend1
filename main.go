@@ -8,7 +8,7 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"restaurant_backend/controllers"
+	"final-restaurant-backend/controllers"
 )
 
 func main() {
@@ -41,9 +41,27 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 func getSession() *sql.DB{
-	s, err := sql.Open("mysql", "root:password@tcp(127.0.0.1:3306)/test")
+var server = "tester112.database.windows.net"
+var port = 1433
+var user = "testing"
+var password = "Apptester123"
+var database = "testing"
+
+
+	// Build connection string
+	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;",
+		server, user, password, port, database)
+	var err error
+	// Create connection pool
+	db, err := sql.Open("sqlserver", connString)
 	if err != nil {
-		panic(err)
+		log.Fatal("Error creating connection pool: ", err.Error())
 	}
-	return s
+	ctx := context.Background()
+	err = db.PingContext(ctx)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return db
 }

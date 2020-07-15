@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"os"
-	"restaurant_backend/goroutine"
-	"restaurant_backend/models"
+	"final-restaurant-backend/goroutine"
+	"final-restaurant-backend/models"
 	"strconv"
 )
 

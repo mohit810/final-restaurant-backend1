@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
-	"restaurant_backend/models"
+	"final-restaurant-backend/models"
 	"sync"
 )
 
