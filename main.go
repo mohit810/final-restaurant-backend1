@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/denisenkom/go-mssqldb"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -8,7 +9,8 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"final-restaurant-backend/controllers"
+	"final-restaurant-backend1/controllers"
+	"errors"
 )
 
 func main() {
@@ -55,12 +57,7 @@ var database = "testing"
 	// Create connection pool
 	db, err := sql.Open("sqlserver", connString)
 	if err != nil {
-		log.Fatal("Error creating connection pool: ", err.Error())
-	}
-	ctx := context.Background()
-	err = db.PingContext(ctx)
-	if err != nil {
-		log.Fatal(err.Error())
+		fmt.Printf("Error:", err.Error())
 	}
 
 	return db
