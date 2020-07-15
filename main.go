@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/denisenkom/go-mssqldb"
+	_ "github.com/denisenkom/go-mssqldb"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"final-restaurant-backend1/controllers"
-	"errors"
+	_ "errors"
 )
 
 func main() {
