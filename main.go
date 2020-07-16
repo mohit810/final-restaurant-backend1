@@ -1,7 +1,6 @@
 package main
 
 import (
-	_ "github.com/denisenkom/go-mssqldb"
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -10,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"final-restaurant-backend1/controllers"
-	_ "errors"
 )
 
 func main() {
@@ -43,22 +41,11 @@ func main() {
 	http.ListenAndServe(":8080", r)
 }
 func getSession() *sql.DB{
-var server = "tester112.database.windows.net"
-var port = 1433
-var user = "testing"
-var password = "Apptester123"
-var database = "testing"
 
-
-	// Build connection string
-	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;",
-		server, user, password, port, database)
-	var err error
-	// Create connection pool
-	db, err := sql.Open("sqlserver", connString)
+	S, err := sql.Open("mysql", "testing@tester112:Apptester123@tcp(tester112.mysql.database.azure.com:3306)/test")
 	if err != nil {
-		fmt.Printf("Error:", err.Error())
+		panic(err)
 	}
 
-	return db
+	return S
 }
