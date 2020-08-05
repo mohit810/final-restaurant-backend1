@@ -79,7 +79,7 @@ func (uc UserController) MobileCreateUser(w http.ResponseWriter, r *http.Request
 	if err != nil {
 		panic(err)
 	}
-	_, err = query.Exec(UserName, EmailId,PassWord,i,AddRess,"http://192.168.1.45:8080/static/dev/deployment/go/src/restaurant_backend/"+file.Name())
+	_, err = query.Exec(UserName, EmailId,PassWord,i,AddRess,"http://40.88.37.46:8080/static/"+file.Name())
 	if err != nil {
 		panic(err)
 	}
@@ -347,7 +347,7 @@ func (uc UserController) GetImage(w http.ResponseWriter, r *http.Request, p http
 	fmt.Println("Request Dump:\n", string(dump))
 	w.WriteHeader(http.StatusOK) // 201
 	_ = r.URL.Query().Get("imagi")
-	http.ServeFile(w, r, "dev/deployment/go/src/restaurant_backend/")
+	http.ServeFile(w, r, "")
 }
 
 func (uc UserController) CreateComments(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
