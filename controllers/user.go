@@ -79,7 +79,7 @@ func (uc UserController) MobileCreateUser(w http.ResponseWriter, r *http.Request
 	if err != nil {
 		panic(err)
 	}
-	_, err = query.Exec(UserName, EmailId,PassWord,i,AddRess,"http://40.88.37.46:8080/static/"+file.Name())
+	_, err = query.Exec(UserName, EmailId,PassWord,i,AddRess,"http://3.19.133.66:8080/static/home/ubuntu/Golang/src/final-restaurant-backend1/"+file.Name())
 	if err != nil {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusForbidden) // 403
