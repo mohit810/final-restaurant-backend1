@@ -42,7 +42,7 @@ func main() {
 }
 func getSession() *sql.DB{
 
-	S, err := sql.Open("mysql", "testing@tester112:Apptester123@tcp(tester112.mysql.database.azure.com:3306)/test")
+	S, err := sql.Open("mysql", "admin:Apptester@tcp(database-1.cytzvmgktguf.us-east-2.rds.amazonaws.com:3306)/test")
 	if err != nil {
 		panic(err)
 	}

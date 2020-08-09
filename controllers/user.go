@@ -81,7 +81,9 @@ func (uc UserController) MobileCreateUser(w http.ResponseWriter, r *http.Request
 	}
 	_, err = query.Exec(UserName, EmailId,PassWord,i,AddRess,"http://40.88.37.46:8080/static/"+file.Name())
 	if err != nil {
-		panic(err)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusForbidden) // 403
+
 	}
 	defer query.Close()
 	var u []*models.User// declare a slice of courses that will hold all of the Course instances scanned from the rows object
@@ -315,8 +317,6 @@ func (uc UserController) MobileLogin(w http.ResponseWriter, r *http.Request, p h
 	EmailId := r.FormValue("email")
 	PassWord := r.FormValue("password")
 	var u []*models.User
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK) // 201
 	tent,err := uc.session.Query("SELECT name, email, pwd, number, address, profilepic from loggedin where email=? AND pwd=?",EmailId,PassWord)
 	if err != nil{
 		fmt.Println(err)
@@ -330,8 +330,13 @@ func (uc UserController) MobileLogin(w http.ResponseWriter, r *http.Request, p h
 			fmt.Println(err)
 			return
 		}
+		if c == nil{
+			w.WriteHeader(http.StatusNotFound) //404
+		}
 		u = append(u,c) // add each instance to the slice
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK) // 201
 	err = json.NewEncoder(w).Encode(u)
 	if err != nil {
 		fmt.Println(err)
